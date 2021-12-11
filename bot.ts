@@ -9,9 +9,6 @@ import {
 import { Track } from './music/track';
 import { MusicSubscription } from './music/subscription';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
-import { token } from './config.json';
-
 const client = new Discord.Client({
     intents: [
         Discord.Intents.FLAGS.GUILDS, 
@@ -191,4 +188,4 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
 client.on('error', console.warn);
 
-void client.login(token);
+void client.login(process.env.token);
