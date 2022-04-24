@@ -19,7 +19,7 @@ export async function run(message: Discord.Message, args: string[], fromPattern:
 
         // Restrict the maximum dice count
         const totalDice = dice.dice.reduce((prev, die) => prev + (die.diceCount || 1), 0);
-        //if(totalDice > 1000) return { plain: `${message.author} might hurt themselves by rolling that many dice at once!` };
+        if(totalDice > 1000) return { plain: `${message.author} might hurt themselves by rolling that many dice at once!` };
 
         // Roll the dice
         const rollResult = dice.roll();
@@ -61,7 +61,7 @@ export async function run(message: Discord.Message, args: string[], fromPattern:
             };
         }
     } catch(err) {
-        return { plain: `${message.author} specified an invalid dice expression: ${err}` };
+        return { plain: `${message.author} specified an invalid dice expression: ${err}, ni-` };
     }
 }
 
