@@ -67,7 +67,7 @@ export async function run(message: Discord.Message, args: string[], fromPattern:
 
 function buildDiceList(result: { diceRaw: any[]; diceSums: { [x: string]: any; }; }, totalDice: number) {
     let diceList = '';
-    if((result.diceRaw.length > 1 || (result.diceRaw.length > 0 && result.diceRaw[0].length > 1))) {
+    if(totalDice <= 100 && (result.diceRaw.length > 1 || (result.diceRaw.length > 0 && result.diceRaw[0].length > 1))) {
         diceList = result.diceRaw.map((res, i) => (res.length > 1 ? `${res.join(' + ')} = ${result.diceSums[i]}` : res[0])).join(',   ');
     }
     return diceList;
