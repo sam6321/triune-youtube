@@ -19,7 +19,7 @@ export async function run(message: Discord.Message, args: string[], fromPattern:
 
         // Restrict the maximum dice count
         const totalDice = dice.dice.reduce((prev, die) => prev + (die.diceCount || 1), 0);
-        if(totalDice > 1000) return { plain: `${message.author} might hurt themselves by rolling that many dice at once!` };
+        //if(totalDice > 1000) return { plain: `${message.author} might hurt themselves by rolling that many dice at once!` };
 
         // Roll the dice
         const rollResult = dice.roll();
@@ -61,13 +61,13 @@ export async function run(message: Discord.Message, args: string[], fromPattern:
             };
         }
     } catch(err) {
-        return { plain: `${message.author} specified an invalid dice expression.` };
+        return { plain: `${message.author} specified an invalid dice expression: ${err}` };
     }
 }
 
 function buildDiceList(result: { diceRaw: any[]; diceSums: { [x: string]: any; }; }, totalDice: number) {
     let diceList = '';
-    if(totalDice <= 100 && (result.diceRaw.length > 1 || (result.diceRaw.length > 0 && result.diceRaw[0].length > 1))) {
+    if((result.diceRaw.length > 1 || (result.diceRaw.length > 0 && result.diceRaw[0].length > 1))) {
         diceList = result.diceRaw.map((res, i) => (res.length > 1 ? `${res.join(' + ')} = ${result.diceSums[i]}` : res[0])).join(',   ');
     }
     return diceList;
