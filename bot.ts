@@ -8,6 +8,7 @@ import {
 } from '@discordjs/voice';
 import { Track } from './music/track';
 import { MusicSubscription } from './music/subscription';
+import {run} from "./roll";
 
 const client = new Discord.Client({
     intents: [
@@ -62,7 +63,15 @@ client.on('messageCreate', async (message) => {
 
 		await message.reply('Deployed!');
 	}
+
+	const cmd = "!roll ";
+	if(message.content.startsWith(cmd)) {
+		const args = message.content.slice(cmd.length);
+		const response = await run(message, args.split(" "), false);
+		await message.reply(response.plain);
+	}
 });
+
 
 /**
  * Maps guild IDs to music subscriptions, which exist if the bot has an active VoiceConnection to the guild.
