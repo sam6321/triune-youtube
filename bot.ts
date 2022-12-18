@@ -1,4 +1,4 @@
-import Discord, { Interaction, GuildMember, Snowflake } from 'discord.js';
+import Discord, { Interaction, GuildMember, Snowflake, GatewayIntentBits, ApplicationCommandOptionType } from 'discord.js';
 import {
 	AudioPlayerStatus,
 	AudioResource,
@@ -12,9 +12,9 @@ import {run} from "./roll";
 
 const client = new Discord.Client({
     intents: [
-        Discord.Intents.FLAGS.GUILDS, 
-        Discord.Intents.FLAGS.GUILD_MESSAGES,
-        Discord.Intents.FLAGS.GUILD_VOICE_STATES
+        GatewayIntentBits.Guilds, 
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildVoiceStates
     ]
 });
 
@@ -33,7 +33,7 @@ client.on('messageCreate', async (message) => {
 				options: [
 					{
 						name: 'song',
-						type: 'STRING' as const,
+						type: ApplicationCommandOptionType.String,
 						description: 'The URL of the song to play',
 						required: true,
 					},
