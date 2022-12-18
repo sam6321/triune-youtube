@@ -14,7 +14,8 @@ const client = new Discord.Client({
     intents: [
         GatewayIntentBits.Guilds, 
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildVoiceStates
+        GatewayIntentBits.GuildVoiceStates,
+		GatewayIntentBits.MessageContent
     ]
 });
 
@@ -64,6 +65,7 @@ client.on('messageCreate', async (message) => {
 		await message.reply('Deployed!');
 	}
 
+	console.log(message);
 	const cmd = "!roll ";
 	if(message.content.startsWith(cmd)) {
 		const args = message.content.slice(cmd.length);
